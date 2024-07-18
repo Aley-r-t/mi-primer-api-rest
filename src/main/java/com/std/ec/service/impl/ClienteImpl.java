@@ -1,6 +1,7 @@
 package com.std.ec.service.impl;
 
 import com.std.ec.model.dao.ClienteDao;
+import com.std.ec.model.dto.ClienteDto;
 import com.std.ec.model.entity.Cliente;
 import com.std.ec.service.ICliente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,14 @@ public class ClienteImpl implements ICliente {
     private ClienteDao clienteDao;
     @Transactional
     @Override
-    public Cliente save(Cliente cliente) {
+    public Cliente save(ClienteDto clienteDto) {
+        Cliente cliente = Cliente.builder()
+                .idCliente(clienteDto.getIdCliente())
+                .nombre(clienteDto.getNombre())
+                .apellido(clienteDto.getApellido())
+                .correo(clienteDto.getCorreo())
+                .fechaRegistro(clienteDto.getFechaRegistro())
+                .build();
         return clienteDao.save(cliente);
     }
 
